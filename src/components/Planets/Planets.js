@@ -1,8 +1,24 @@
 import './Planets.css';
+import React, { useState, useEffect } from "react";
 
 import Grid from '../Grid';
 
 function Planets() {
+
+  const [hasError, setErrors] = useState(false);
+  const [planets, setPlanets] = useState({});
+
+  async function fetchData() {
+    const res = await fetch("https://swapi.dev/api/planets/");
+    res
+      .json()
+      .then(res => setPlanets(res))
+      .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const data = {
     header: [
