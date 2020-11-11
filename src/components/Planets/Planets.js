@@ -2,22 +2,15 @@ import './Planets.css';
 import React, { useState, useEffect } from "react";
 
 import Grid from '../Grid';
+import {getPlanets} from "../../store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 function Planets() {
-
-  const [hasError, setErrors] = useState(false);
-  const [planets, setPlanets] = useState({});
-
-  async function fetchData() {
-    const res = await fetch("https://swapi.dev/api/planets/");
-    res
-      .json()
-      .then(res => setPlanets(res))
-      .catch(err => setErrors(err));
-  }
+  const content = useSelector(state => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchData();
+    dispatch(getPlanets());
   }, []);
 
   const data = {
