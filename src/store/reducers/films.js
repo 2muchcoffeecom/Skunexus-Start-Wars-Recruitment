@@ -4,7 +4,7 @@ const initialState = {
   error: null
 };
 
-export function rootReducer(state = initialState, action) {
+export default function films(state = initialState, action) {
   switch (action.type) {
     case 'GET_PLANETS_STARTED':
       return {
@@ -16,7 +16,7 @@ export function rootReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: null,
-        planets: [...state.planets, action.payload]
+        planets: [...state.planets, ...action.payload.results]
       };
     case 'GET_PLANETS_FAILURE':
       return {
