@@ -30,7 +30,27 @@ export const getFilms = (filmsUrl) => {
         dispatch(getFilmsSuccess(films));
       }))
       .catch(err => {
-        console.log(err)
+        dispatch(getFilmsFailure(err.message));
+      })
+  }
+};
+
+export const getResidents = (residentsUrl) => {
+  return dispatch => {
+    const requests = [];
+    residentsUrl.forEach(residentUrl => {
+      requests.push(axios.get(residentUrl))
+    })
+
+    axios.all(requests)
+      .then(axios.spread((...args) => {
+        const residents = args.map(resident => {
+          return resident.data
+        })
+        dispatch(getResidentsSuccess(residents));
+      }))
+      .catch(err => {
+        dispatch(getResidentsFailure(err.message));
       })
   }
 };
@@ -55,11 +75,32 @@ const getPlanetsFailure = error => ({
   }
 });
 
+
 const getFilmsSuccess = data => {
   return {
     type: 'GET_FILMS_SUCCESS',
-    payload: {
-      ...data
-    }
+    payload: data
   }
 };
+
+const getFilmsFailure = error => ({
+  type: 'GET_FILMS_FAILURE',
+  payload: {
+    error
+  }
+});
+
+
+const getResidentsSuccess = data => {
+  return {
+    type: 'GET_RESIDENTS_SUCCESS',
+    payload: data
+  }
+};
+
+const getResidentsFailure = error => ({
+  type: 'GET_RESIDENTS_FAILURE',
+  payload: {
+    error
+  }
+});

@@ -1,24 +1,24 @@
 const initialState = {
   loading: false,
-  films: [],
+  residents: [],
   error: null
 };
 
-export default function films(state = initialState, action) {
+export default function residents(state = initialState, action) {
   switch (action.type) {
     case 'GET_FILMS_STARTED':
       return {
         ...state,
         loading: true
       };
-    case 'GET_FILMS_SUCCESS':
+    case 'GET_RESIDENTS_SUCCESS':
       return {
         ...state,
         loading: false,
         error: null,
-        films: [...action.payload]
+        residents: [...action.payload]
       };
-    case 'GET_FILMS_FAILURE':
+    case 'GET_RESIDENTS_FAILURE':
       return {
         ...state,
         loading: false,

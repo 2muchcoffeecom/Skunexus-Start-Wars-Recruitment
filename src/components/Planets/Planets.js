@@ -1,34 +1,17 @@
 import './Planets.css';
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 
 import Grid from '../Grid';
-import {getFilms, getPlanets} from "../../store/actions";
+import {getFilms, getPlanets, getResidents} from "../../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 
 function Planets() {
-  const content = useSelector(state => state);
+  const planetsContent = useSelector(state => state.planets);
   const dispatch = useDispatch();
-
-
-  const showFilms = (films) => {
-    dispatch(getFilms(films));
-
-    const data = {
-      header: [
-        'title',
-        'episode_id',
-        'opening_crawl',
-        'director',
-        'producer',
-        'release_date'
-      ],
-    }
-  }
 
   useEffect(() => {
     dispatch(getPlanets());
-  }, []);
+  }, [dispatch]);
 
   const data = {
     header: [
@@ -42,22 +25,24 @@ function Planets() {
       'surface_water',
       'population'
     ],
-    values: content.planets,
+    values: planetsContent.planets,
     actions: [
       {
+        link: "/films",
         label: 'Go to Films',
-        // action: (row) => { console.log(`redirect to grid with ${row.films.length} Films`)}
-        action: (row) => { showFilms(row.films)}
+        action: (row) => {dispatch(getFilms(row.films))}
       },
       {
+        link: "/residents",
         label: 'Go to Residents',
-        action: (row) => { console.log(`redirect to grid with ${row.residents.length} Residents`)}
+        action: (row) => {dispatch(getResidents(row.residents))}
       }
     ]
   }
 
   return (
     <div className='App'>
+      <h1>Star Wars Planets</h1>
       <Grid data={data} />
     </div>
   );

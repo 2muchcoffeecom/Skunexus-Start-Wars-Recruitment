@@ -1,4 +1,5 @@
 import './Grid.css';
+import {Link} from "react-router-dom";
 
 function Grid({data: {header = [], values = [], actions = []}}) {
   return (
@@ -15,7 +16,7 @@ function Grid({data: {header = [], values = [], actions = []}}) {
             {header.map((colName) => <td key={colName}>{row[colName]}</td>)}
             {!!actions.length && 
               <td className='gridActions'>
-                {actions.map(({label, action}) => <button onClick={() => action(row)}>{label}</button>)}
+                {actions.map(({link, label, action}) => <Link key={link} to={link}><button onClick={() => action(row)}>{label}</button></Link>)}
               </td>
             }
           </tr>
