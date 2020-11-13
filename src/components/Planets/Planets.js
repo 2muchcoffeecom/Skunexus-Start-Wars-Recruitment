@@ -11,10 +11,21 @@ function Planets() {
   const [modalVisible, changeModalVisible] = useState(false);
   const planetsContent = useSelector(state => state.planets);
   const dispatch = useDispatch();
+  const handleScroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    if (planetsContent.next) {
+      dispatch(getPlanets(planetsContent.next));
+    }
+  };
 
   useEffect(() => {
     dispatch(getPlanets());
   }, [dispatch]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [planetsContent]);
 
   const data = {
     header: [
@@ -41,8 +52,9 @@ function Planets() {
         action: (row) => {dispatch(getResidents(row.residents))}
       }
     ],
-    customColumns: true
-  }
+    customColumns: true,
+    isActionDisplay: true,
+  };
 
   return (
     <div className='App'>

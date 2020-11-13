@@ -18,7 +18,7 @@ function Films() {
       'release_date'
     ],
     values: filmsContent.films,
-  }
+  };
 
   return (
     <div className='App'>

@@ -20,13 +20,13 @@ export const getFilms = (filmsUrl) => {
     const requests = [];
     filmsUrl.forEach(filmUrl => {
       requests.push(axios.get(filmUrl))
-    })
+    });
 
     axios.all(requests)
       .then(axios.spread((...args) => {
         const films = args.map(film => {
           return film.data
-        })
+        });
         dispatch(getFilmsSuccess(films));
       }))
       .catch(err => {
@@ -40,13 +40,13 @@ export const getResidents = (residentsUrl) => {
     const requests = [];
     residentsUrl.forEach(residentUrl => {
       requests.push(axios.get(residentUrl))
-    })
+    });
 
     axios.all(requests)
       .then(axios.spread((...args) => {
         const residents = args.map(resident => {
           return resident.data
-        })
+        });
         dispatch(getResidentsSuccess(residents));
       }))
       .catch(err => {

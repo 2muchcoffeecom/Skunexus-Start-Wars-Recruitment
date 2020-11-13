@@ -20,7 +20,7 @@ function Residents() {
       'gender',
 ],
     values: residentsContent.residents,
-  }
+  };
 
   return (
     <div className='App'>
