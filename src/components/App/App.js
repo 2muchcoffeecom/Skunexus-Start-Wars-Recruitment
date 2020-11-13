@@ -10,17 +10,17 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Planets />
-        </Route>
-        <Route path="/films">
-          <Films />
-        </Route>
-        <Route path="/residents">
-          <Residents />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route exact path="/">
+            <Planets />
+          </Route>
+          <Route path="/films">
+            <Films />
+          </Route>
+          <Route path="/residents">
+            <Residents />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

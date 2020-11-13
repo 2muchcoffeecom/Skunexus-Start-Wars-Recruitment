@@ -1,3 +1,5 @@
+import { unionWith } from 'lodash';
+
 const initialState = {
   loading: false,
   planets: [],
@@ -16,7 +18,7 @@ export default function planets(state = initialState, action) {
         ...state,
         loading: false,
         error: null,
-        planets: [...state.planets, ...action.payload.results]
+        planets: unionWith(action.payload.results, state.planets, (a, b) => a.name === b.name),
       };
     case 'GET_PLANETS_FAILURE':
       return {

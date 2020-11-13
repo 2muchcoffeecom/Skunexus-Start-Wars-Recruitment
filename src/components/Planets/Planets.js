@@ -1,11 +1,14 @@
 import './Planets.css';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Grid from '../Grid';
+import PlanetModal from "./PlanetModal";
 import {getFilms, getPlanets, getResidents} from "../../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 
+
 function Planets() {
+  const [modalVisible, changeModalVisible] = useState(false);
   const planetsContent = useSelector(state => state.planets);
   const dispatch = useDispatch();
 
@@ -37,12 +40,19 @@ function Planets() {
         label: 'Go to Residents',
         action: (row) => {dispatch(getResidents(row.residents))}
       }
-    ]
+    ],
+    customColumns: true
   }
 
   return (
     <div className='App'>
-      <h1>Star Wars Planets</h1>
+      <div className='title'>
+        <h1>Star Wars Planets</h1>
+        <button onClick={() => changeModalVisible(true)}>Create Planet</button>
+      </div>
+      {modalVisible && <PlanetModal
+        onClose={() => changeModalVisible(false)}
+      />}
       <Grid data={data} />
     </div>
   );
