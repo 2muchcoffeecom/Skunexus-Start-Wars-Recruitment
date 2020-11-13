@@ -42,9 +42,13 @@ function Grid({data: {header = [], values = [], actions = [], customColumns}}) {
 
 Grid.propTypes = {
   data: PropTypes.shape({
-    header: PropTypes.array,
-    values: PropTypes.array,
-    actions: PropTypes.array,
+    header: PropTypes.arrayOf(PropTypes.string).isRequired,
+    values: PropTypes.array.isRequired,
+    actions: PropTypes.arrayOf(PropTypes.shape({
+      link: PropTypes.string,
+      label: PropTypes.string,
+      action: PropTypes.func
+    })).isRequired,
     customColumns: PropTypes.bool,
   })
 };

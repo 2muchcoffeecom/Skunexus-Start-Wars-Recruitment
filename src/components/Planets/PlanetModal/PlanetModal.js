@@ -1,6 +1,8 @@
 import React from "react";
 import './PlanetModal.css';
 import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
+import Grid from "../../Grid";
 
 function PlanetModal(props) {
   const { register, handleSubmit, errors } = useForm();
@@ -74,5 +76,9 @@ function PlanetModal(props) {
     </div>
   )
 }
+
+Grid.propTypes = {
+  onClose: PropTypes.func
+};
 
 export default PlanetModal
